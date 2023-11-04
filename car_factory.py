@@ -9,101 +9,38 @@ from engine.willoughby_engine import WilloughbyEngine
 from battery.spindler_battery import SpindlerBattery
 from battery.nubbin_battery import NubbinBattery
 
-class Calliope(Car):
-    def __init__(self, last_service_date, current_mileage, last_service_mileage):
-        self.last_service_date = last_service_date
-        self.current_mileage = current_mileage
-        self.last_service_mileage = last_service_mileage
+class CarFactory:
+    def create_calliope(current_date, last_service_date, current_mileage, last_service_mileage):
+        engine = CapuletEngine(current_mileage, last_service_mileage)
+        battery = SpindlerBattery(last_service_date)
+        car = Car(battery, engine)
 
-        # Engine
-        self.engine = CapuletEngine(current_mileage, last_service_mileage)
-
-        # Battery
-        self.battery = SpindlerBattery(last_service_date)
+        return car
     
-    def needs_service(self):
-        if self.battery.needs_service():
-            return True
-        elif self.engine.engine_should_be_serviced():
-            return True
-        else:
-            False
+    def create_glissade(current_date, last_service_date, current_mileage, last_service_mileage):
+        engine = WilloughbyEngine(current_mileage, last_service_mileage)
+        battery = SpindlerBattery(last_service_date)
+        car = Car(battery, engine)
 
-class Glissade(Car):
-    def __init__(self, last_service_date, current_mileage, last_service_mileage):
-        self.last_service_date = last_service_date
-        self.current_mileage = current_mileage
-        self.last_service_mileage = last_service_mileage
+        return car
 
-        # Engine
-        self.engine = WilloughbyEngine(current_mileage, last_service_mileage)
+    def create_palindrome(current_date, last_service_date, warning_light_on):
+        engine = SternmanEngine(warning_light_on)
+        battery = SpindlerBattery(last_service_date)
+        car = Car(battery, engine)
 
-        # Battery
-        self.battery = SpindlerBattery(last_service_date)
-    
-    def needs_service(self):
-        if self.battery.needs_service():
-            return True
-        elif self.engine.engine_should_be_serviced():
-            return True
-        else:
-            False
+        return car
 
-class Palindrome(Car):
-    def __init__(self, last_service_date, warning_light_on):
-        self.last_service_date = last_service_date
-        self.warning_light_on = warning_light_on
+    def create_rarschach(current_date, last_service_date, current_mileage, last_service_mileage):
+        engine = WilloughbyEngine(current_mileage, last_service_mileage)
+        battery = NubbinBattery(last_service_date)
+        car = Car(battery, engine)
 
-        # Engine
-        self.engine = SternmanEngine(warning_light_on)
+        return car
 
-        # Battery
-        self.battery = SpindlerBattery(last_service_date)
-    
-    def needs_service(self):
-        if self.battery.needs_service():
-            return True
-        elif self.engine.engine_should_be_serviced():
-            return True
-        else:
-            False
+    def create_thovex(current_date, last_service_date, current_mileage, last_service_mileage):
+        engine = CapuletEngine(current_mileage, last_service_mileage)
+        battery = NubbinBattery(last_service_date)
+        car = Car(battery, engine)
 
-class Rorschach(Car):
-    def __init__(self, last_service_date, current_mileage, last_service_mileage):
-        self.last_service_date = last_service_date
-        self.current_mileage = current_mileage
-        self.last_service_mileage = last_service_mileage
-
-        # Engine
-        self.engine = WilloughbyEngine(current_mileage, last_service_mileage)
-
-        # Battery
-        self.battery = NubbinBattery(last_service_date)
-    
-    def needs_service(self):
-        if self.battery.needs_service():
-            return True
-        elif self.engine.engine_should_be_serviced():
-            return True
-        else:
-            False
-
-class Thovex(Car):
-    def __init__(self, last_service_date, current_mileage, last_service_mileage):
-        self.last_service_date = last_service_date
-        self.current_mileage = current_mileage
-        self.last_service_mileage = last_service_mileage
-
-        # Engine
-        self.engine = CapuletEngine(current_mileage, last_service_mileage)
-
-        # Battery
-        self.battery = NubbinBattery(last_service_date)
-    
-    def needs_service(self):
-        if self.battery.needs_service():
-            return True
-        elif self.engine.engine_should_be_serviced():
-            return True
-        else:
-            False
+        return car

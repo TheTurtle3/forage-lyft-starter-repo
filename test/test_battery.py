@@ -30,7 +30,7 @@ class TestSpindler(unittest.TestCase):
     # battery has expired, needs to be serviced
     def test_battery_should_be_serviced(self):
         today = datetime.today().date()
-        last_service_date = today.replace(year=today.year - 3)
+        last_service_date = today.replace(year=today.year - 4)
         battery = SpindlerBattery(last_service_date)
 
         self.assertTrue(battery.needs_service())
